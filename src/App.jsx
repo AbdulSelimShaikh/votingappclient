@@ -8,17 +8,18 @@ function App() {
   const [question, setQuestion] = useState("");
 
   // Fetch initial votes from the server
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "https://votingapp-server-five.vercel.app/getVotes"
+      );
+      setVotes(response.data);
+    } catch (error) {
+      console.error("Error fetching votes:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://votingapp-server-five.vercel.app/getVotes"
-        );
-        setVotes(response.data);
-      } catch (error) {
-        console.error("Error fetching votes:", error);
-      }
-    };
     fetchData();
   }, []);
 
@@ -62,6 +63,8 @@ function App() {
       });
       setNewVote(false);
       setQuestion("");
+      // Fetch the updated list of votes
+      fetchData();
     } catch (error) {
       console.error("Error adding vote:", error);
     }
