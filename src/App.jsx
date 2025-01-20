@@ -11,7 +11,9 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/getVotes");
+        const response = await axios.get(
+          "https://votingapp-server-five.vercel.app/getVotes"
+        );
         setVotes(response.data);
       } catch (error) {
         console.error("Error fetching votes:", error);
@@ -55,7 +57,9 @@ function App() {
       return;
     }
     try {
-      await axios.post("http://localhost:8000/new-vote", { question });
+      await axios.post("https://votingapp-server-five.vercel.app/new-vote", {
+        question,
+      });
       setNewVote(false);
       setQuestion("");
     } catch (error) {
@@ -66,7 +70,9 @@ function App() {
   // Handle delete vote
   const handleDeleteVote = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/delete-vote/${id}`);
+      await axios.delete(
+        `https://votingapp-server-five.vercel.app/delete-vote/${id}`
+      );
       setVotes((prevVotes) => prevVotes.filter((vote) => vote._id !== id)); // Remove the deleted vote from state
     } catch (error) {
       console.error("Error deleting vote:", error);
