@@ -1,8 +1,8 @@
 import { io } from "socket.io-client";
 
-// Connecting to the Socket.IO server
+// Make sure the URL is correct and points to your deployed server
 const socket = io("https://votingapp-server-five.vercel.app", {
-  transports: ["websocket"], // This forces the WebSocket connection
+  transports: ["websocket"],
 });
 
 export default socket;
